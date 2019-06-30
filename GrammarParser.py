@@ -3,11 +3,11 @@ grammar_file = "grammar1.txt"
 
 class Grammar:
 	def __init__(self, variables, alphabet, start, rules):
-		self.variables = variables
-		self.alphabet = alphabet
-		self.start = start
-		self.rules = rules
-		self.type = "Typ-0"
+		self.variables = variables  # set of strings
+		self.alphabet = alphabet  # set of strings
+		self.start = start  # string
+		self.rules = rules  # map string identifier -> string rule
+		self.type = "Typ-0"  # string
 
 	def __str__(self):
 		string = ["V = {}\n".format(self.variables), "∑ = {}\n".format(self.alphabet), "S = {}\n".format(self.start), "P = {"]
@@ -47,6 +47,7 @@ def parse(filename):
 	alph = set()
 	tokens = line.split("=")
 	if tokens[0] != "A":
+		print("Grammar description isn't valid")
 		return None
 	else:
 		tokens[1] = tokens[1].replace("{", "")
@@ -61,6 +62,7 @@ def parse(filename):
 	line = line.replace("\n", "")
 	tokens = line.split("=")
 	if tokens[0] != "S":
+		print("Grammar description isn't valid")
 		return None
 	else:
 		s = tokens[1]
@@ -72,6 +74,7 @@ def parse(filename):
 	line.replace(" ", "")
 	tokens = line.split("=")
 	if tokens[0] != "P":
+		print("Grammar description isn't valid")
 		return None
 	else:
 		number_of_rules = int(tokens[1])
