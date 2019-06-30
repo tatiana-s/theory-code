@@ -10,7 +10,7 @@ class Grammar:
 		self.type = "Typ-0"  # string
 
 	def __str__(self):
-		string = ["V = {}\n".format(self.variables), "∑ = {}\n".format(self.alphabet), "S = {}\n".format(self.start), "P = {"]
+		string = ["V = {}\n".format(self.variables), "∑ = {}\n".format(sorted(self.alphabet)), "S = {}\n".format(self.start), "P = {"]
 		count = 0
 		for p in self.rules.keys():
 			if count < len(self.rules) - 1:
