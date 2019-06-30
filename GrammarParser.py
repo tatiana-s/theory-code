@@ -1,6 +1,3 @@
-grammar_file = "grammar1.txt"
-
-
 class Grammar:
 	def __init__(self, variables, alphabet, start, rules):
 		self.variables = variables  # set of strings
@@ -86,10 +83,14 @@ def parse(filename):
 		tokens = line.split("->")
 		rul[tokens[0]] = tokens[1]
 
+	f.close()
+
 	# resulting grammar object
 	return Grammar(var, alph, s, rul)
 
 
+# test example
+grammar_file = "grammar1.txt"
 test = parse(grammar_file)
 
 

@@ -1,11 +1,10 @@
-description_file = "dfa1.txt"
-
-
+# deterministic finite automaton
 class DFA:
 	def __init__(self, states, alphabet, initial_state):
 		self.states = states  # map state identifier -> state
 		self.alphabet = alphabet  # set of strings
-		self.initial_state = initial_state  # string
+		self.initial_state = initial_state
+		self.current_state = initial_state  # string
 
 	def __str__(self):
 		string = ["S = {"]
@@ -17,10 +16,20 @@ class DFA:
 				string.append("{}}}\n".format(s))
 			count = count+1
 		string.append("∑ = {}\n".format(sorted(self.alphabet)))
-		string.append("Initial State = {}\n".format(self.initial_state))
+		string.append("Initial State = {}\n".format(self.current_state))
 		return "".join(string)
 
+	def transition(self, input):
+		self.current_state = self.states[self.current_state].transition(input)
 
+	def is_in_end_state(self):
+		return self.states[self.current_state].is_end_state
+
+	def reset(self):
+		self.current_state = self.initial_state
+
+
+# state
 class State:
 	def __init__(self, identifier):
 		self.identifier = identifier  # string
@@ -29,9 +38,14 @@ class State:
 		self.transitions = {}  # map input -> resulting state identifier
 
 	def transition(self, input):
-		return self.transitions[input]
+		if self.accepted_input.__contains__(input):
+			return self.transitions[input]
+		else:
+			print("Input {} not accepted".format(input))
+			return None
 
 
+# turns a description of an automaton into an object which can be processed further
 def parse(is_deterministic, filename):
 	if is_deterministic:
 		f = open(filename, "r")
@@ -113,6 +127,8 @@ def parse(is_deterministic, filename):
 				print("Automaton description isn't valid")
 				return None
 
+		f.close()
+
 		# resulting dfa object
 		return DFA(states, alph, initial)
 
@@ -120,5 +136,32 @@ def parse(is_deterministic, filename):
 	return None
 
 
+# checks whether given word is accepted by given automaton
+def word_accepted(automaton, word):
+	for char in word:
+		if automaton.alphabet.__contains__(char):
+			automaton.transition(char)
+	result = automaton.is_in_end_state()
+	automaton.reset()
+	return result
+
+
+# test example should accept all words where: (number of a's) - (number of b's) congruent to 3 (mod 4)
+description_file = "dfa1.txt"
 test = parse(True, description_file)
-print(test)
+
+w1 = "aaa"
+w2 = "aaaab"
+w3 = "a"
+w4 = "b"
+w5 = "abababaaa"
+w6 = "bbbaaaaaaa"
+
+print("{} is accepted: {} (should be: True)".format(w1, word_accepted(test, w1)))
+print("{} is accepted: {} (should be: True)".format(w2, word_accepted(test, w2)))
+print("{} is accepted: {} (should be: False)".format(w3, word_accepted(test, w3)))
+print("{} is accepted: {} (should be: True)".format(w4, word_accepted(test, w4)))
+print("{} is accepted: {} (should be: True)".format(w5, word_accepted(test, w5)))
+print("{} is accepted: {} (should be: False)".format(w6, word_accepted(test, w6)))
+
+
