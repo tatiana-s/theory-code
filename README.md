@@ -33,4 +33,5 @@ Work in Progress dealing with concepts from theoretical computer science such as
  
 ## Sources
 
-For theory background I'm currently mostly using *'Theoretische Informatik - kurz gefasst'* by Uwe Schöning.
+- For theory background I'm currently mostly using *'Theoretische Informatik - kurz gefasst'* by Uwe Schöning.
+- For graph visualisation: [NetworkX](https://networkx.github.io/documentation/networkx-1.10/index.html)

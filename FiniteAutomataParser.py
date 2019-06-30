@@ -150,18 +150,18 @@ def word_accepted(automaton, word):
 description_file = "dfa1.txt"
 test = parse(True, description_file)
 
-w1 = "aaa"
-w2 = "aaaab"
-w3 = "a"
-w4 = "b"
-w5 = "abababaaa"
-w6 = "bbbaaaaaaa"
+# w1 = "aaa"
+# w2 = "aaaab"
+# w3 = "a"
+# w4 = "b"
+# w5 = "abababaaa"
+# w6 = "bbbaaaaaaa"
 
-print("{} is accepted: {} (should be: True)".format(w1, word_accepted(test, w1)))
-print("{} is accepted: {} (should be: True)".format(w2, word_accepted(test, w2)))
-print("{} is accepted: {} (should be: False)".format(w3, word_accepted(test, w3)))
-print("{} is accepted: {} (should be: True)".format(w4, word_accepted(test, w4)))
-print("{} is accepted: {} (should be: True)".format(w5, word_accepted(test, w5)))
-print("{} is accepted: {} (should be: False)".format(w6, word_accepted(test, w6)))
+# print("{} is accepted: {} (should be: True)".format(w1, word_accepted(test, w1)))
+# print("{} is accepted: {} (should be: True)".format(w2, word_accepted(test, w2)))
+# print("{} is accepted: {} (should be: False)".format(w3, word_accepted(test, w3)))
+# print("{} is accepted: {} (should be: True)".format(w4, word_accepted(test, w4)))
+# print("{} is accepted: {} (should be: True)".format(w5, word_accepted(test, w5)))
+# print("{} is accepted: {} (should be: False)".format(w6, word_accepted(test, w6)))
 
 
