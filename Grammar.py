@@ -17,8 +17,4 @@ class Grammar:
 			count += 1
 		string.append("(Type: {})\n".format(self.type))
 		return "".join(string)
-
-
-
-
-
+	
